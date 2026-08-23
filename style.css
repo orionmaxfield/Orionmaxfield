@@ -1,0 +1,545 @@
+/* ==========================================================================
+   Orion Maxfield — site styles
+
+   One stylesheet for every page. Change it here and it changes everywhere;
+   don't paste CSS back into the individual HTML files.
+   ========================================================================== */
+
+:root {
+  /* Nothing here is pure black on pure white. Paper and ink are both warm,
+     which is most of the difference between "default" and "designed". */
+  --paper: #FDFCFA;
+  --paper-raised: #F5F1EA;
+  --ink: #17140F;
+  --ink-soft: #4A443B;
+  --accent: #24455F;
+  --accent-strong: #14293C;
+  --on-accent: #FDFCFA;
+  --rule: #DED7CB;
+  --rule-strong: #C0B8A8;
+
+  --shell: 40rem;   /* masthead, footer, list pages */
+  --measure: 36rem; /* long-form prose sits slightly narrower */
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+
+  --ease: 150ms ease;
+}
+
+/* The same palette with the roles swapped, kept in the same warm family
+   so dark mode reads as the same site rather than a different one. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1A1815;
+    --paper-raised: #23201A;
+    --ink: #F2EDE4;
+    --ink-soft: #B5AD9F;
+    --accent: #9FC3E6;
+    --accent-strong: #C4DAF1;
+    --on-accent: #16140F;
+    --rule: #35312A;
+    --rule-strong: #4A443B;
+  }
+}
+
+/* --------------------------------------------------------------- base --- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.7;
+  font-weight: 450;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Keyboard users get a way past the nav without tabbing through it. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------- header --- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.75rem 0;
+  margin-bottom: 4rem;
+}
+
+.masthead .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+nav {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+nav a {
+  position: relative;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-left: 1.6rem;
+  padding-bottom: 3px;
+  transition: color var(--ease);
+}
+
+nav a:first-child { margin-left: 0; }
+
+/* Hairline that sweeps in on hover and stays put on the current page. */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible { color: var(--ink); }
+
+nav a:hover::after,
+nav a:focus-visible::after { transform: scaleX(1); }
+
+nav a[aria-current="page"] { color: var(--ink); }
+
+nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+  background: var(--accent);
+}
+
+/* --------------------------------------------------------------- type --- */
+
+h1, h2, h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+h1 { font-size: 1.95rem; }
+h2 { font-size: 1.18rem; margin-top: 3.5rem; }
+h3 { font-size: 1rem; }
+
+p { margin: 0 0 1.5rem; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--ease);
+}
+
+a:hover { color: var(--accent-strong); }
+
+em { font-style: italic; }
+
+strong { font-weight: 600; }
+
+.lede {
+  font-size: 1.85rem;
+  line-height: 1.32;
+  margin: 0 0 1.75rem;
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+.sub {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 32rem;
+}
+
+/* Eyebrow: marks which of the two pillars a piece belongs to. */
+.pillar {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.55rem;
+}
+
+.pillar::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--accent);
+  margin-right: 0.6rem;
+  vertical-align: 0.08rem;
+}
+
+/* ----------------------------------------------------------- sections --- */
+
+section { margin-bottom: 4.5rem; }
+
+.hero { margin-bottom: 5rem; }
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: 1rem;
+}
+
+/* ------------------------------------------------------ writing list --- */
+
+.entry {
+  padding: 1.9rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry:last-child { border-bottom: none; }
+
+.entry a {
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.3;
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  /* Underline drawn as a background so it can animate its width. */
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 220ms ease, color var(--ease);
+}
+
+.entry a:hover,
+.entry a:focus-visible {
+  color: var(--accent);
+  background-size: 100% 1px;
+}
+
+.entry p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.6;
+  max-width: 33rem;
+}
+
+.date {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* -------------------------------------------------------- about strip --- */
+
+.strip {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+.portrait {
+  width: 6.5rem;
+  height: 8rem;
+  flex: none;
+  object-fit: cover;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  filter: grayscale(1) contrast(1.05);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.strip p { font-size: 1.06rem; line-height: 1.65; }
+
+/* ------------------------------------------------------------- signup --- */
+
+.signup {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2.25rem 1.75rem 2rem;
+}
+
+.signup h2 { margin-top: 0; }
+
+.signup p { font-size: 1.04rem; max-width: 30rem; }
+
+.fields { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+input[type="email"],
+input[type="text"],
+textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 3px;
+  flex: 1 1 15rem;
+  min-width: 0;
+  transition: border-color var(--ease);
+}
+
+input:hover,
+textarea:hover { border-color: var(--ink-soft); }
+
+textarea {
+  width: 100%;
+  min-height: 9rem;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+::placeholder { color: var(--ink-soft); opacity: 1; }
+
+button {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.72rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  flex: none;
+  transition: background var(--ease), border-color var(--ease), transform var(--ease);
+}
+
+button:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+button:active { transform: translateY(1px); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.form-note {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-top: 0.9rem;
+}
+
+/* ------------------------------------------------------------ article --- */
+
+article { margin-bottom: 4rem; }
+
+article h1 {
+  font-size: 2.15rem;
+  line-height: 1.18;
+  margin-bottom: 0.85rem;
+  max-width: 32rem;
+}
+
+article > p { max-width: var(--measure); }
+
+.byline {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.5rem;
+}
+
+/* The paragraph right after the byline is the lead. (Not p:first-of-type —
+   that selects the byline itself.) */
+.byline + p { font-size: 1.06rem; }
+
+.byline + p::first-letter {
+  float: left;
+  font-family: var(--serif);
+  font-size: 3.5em;
+  line-height: 0.84;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0.03em 0.09em 0 0;
+}
+
+/* Short accent rule marks each section break. */
+article h2 {
+  margin-top: 3.4rem;
+  font-size: 1.22rem;
+  max-width: var(--measure);
+}
+
+article h2::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.75;
+  margin-bottom: 1.15rem;
+}
+
+blockquote {
+  margin: 2.25rem 0;
+  padding-left: 1.4rem;
+  border-left: 2px solid var(--accent);
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: var(--measure);
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+.next {
+  border-top: 1px solid var(--rule);
+  padding-top: 2rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+
+.next a { text-decoration: none; }
+.next a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ------------------------------------------------------------- footer --- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 5rem;
+  padding: 2.5rem 0 4rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+footer a { color: var(--accent); }
+footer .disclaimer { max-width: 34rem; margin: 0 0 1rem; }
+footer .crisis { color: var(--ink); font-weight: 500; }
+
+/* ------------------------------------------------ motion + responsive --- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  body { animation: rise 0.5s ease-out both; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 34rem) {
+  body { font-size: 20px; }
+  .lede { font-size: 1.5rem; }
+  h1 { font-size: 1.6rem; }
+  article h1 { font-size: 1.7rem; }
+  .byline + p::first-letter { font-size: 3em; }
+  .masthead { margin-bottom: 3rem; }
+  nav a { margin-left: 0; margin-right: 1.25rem; }
+  .strip { flex-direction: column; gap: 1.25rem; }
+  .signup { padding: 1.75rem 1.25rem; }
+}
+
+/* --------------------------------------------------------------- print --- */
+
+@media print {
+  .masthead nav, .signup, .next, .skip { display: none; }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+    animation: none;
+  }
+
+  .wrap { max-width: none; padding: 0; }
+
+  a { color: #000; }
+
+  /* Essays get read on paper too; show where the links went. */
+  article a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
