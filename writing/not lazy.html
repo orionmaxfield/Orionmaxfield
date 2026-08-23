@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>You're Not Lazy. Nothing Is Asking Anything of You. — Orion Maxfield</title>
+  <meta name="description" content="Why capable people stall out when nothing needs them, and the smallest thing that works.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FFFFFF;
+      --ink: #000000;
+      --slate: #12293F;
+      --slate-soft: #24405C;
+      --muted: #2E2C29;
+      --rule: #BEB8AC;
+      color-scheme: light dark;
+    }
+
+    /* If the reader's phone or laptop is set to dark mode, flip the whole
+       palette instead of letting the browser guess. Light text, dark paper. */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #14161A;
+        --ink: #F4F1EB;
+        --slate: #9DC4EC;
+        --slate-soft: #B4CFEE;
+        --muted: #D3CEC5;
+        --rule: #3A3F47;
+      }
+      .portrait { background: #2A2E34; }
+      button { color: #14161A; }
+      input[type="email"], input[type="text"], textarea {
+        background: #1D2027;
+        color: var(--ink);
+      }
+      ::placeholder { color: #9A958C; }
+    }
+
+    html { background: var(--paper); }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Newsreader", Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.75;
+      font-weight: 450;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ---------- header ---------- */
+
+    .masthead {
+      border-bottom: 1px solid var(--rule);
+      padding: 1.75rem 0;
+      margin-bottom: 4rem;
+    }
+
+    .masthead .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 2rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--slate);
+      padding-bottom: 2px;
+    }
+
+    nav {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    nav a {
+      color: var(--slate);
+      text-decoration: none;
+      margin-left: 1.5rem;
+    }
+
+    nav a:first-child { margin-left: 0; }
+    nav a:hover, nav a:focus-visible { color: var(--slate); }
+    nav a[aria-current="page"] { color: var(--ink); }
+
+    /* ---------- type ---------- */
+
+    h1, h2, h3 {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 0 0 1rem;
+    }
+
+    h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.15rem; margin-top: 3.5rem; }
+    h3 { font-size: 1rem; }
+
+    p { margin: 0 0 1.5rem; }
+
+    a { color: var(--slate); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    em { font-style: italic; }
+
+    .lede {
+      font-size: 1.85rem;
+      line-height: 1.35;
+      margin: 0 0 1.75rem;
+      max-width: 34rem;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 32rem;
+    }
+
+    /* eyebrow: marks which of the two pillars a piece belongs to */
+    .pillar {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar::before {
+      content: "";
+      display: inline-block;
+      width: 0.45rem;
+      height: 0.45rem;
+      background: var(--slate);
+      margin-right: 0.55rem;
+      vertical-align: 0.05rem;
+    }
+
+    /* ---------- sections ---------- */
+
+    section { margin-bottom: 4.5rem; }
+
+    .hero { margin-bottom: 5rem; }
+
+    .section-label {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2rem;
+    }
+
+    /* ---------- writing list ---------- */
+
+    .entry { margin-bottom: 2.5rem; }
+
+    .entry a {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.3;
+      display: inline-block;
+      margin-bottom: 0.35rem;
+    }
+
+    .entry a:hover, .entry a:focus-visible {
+      color: var(--slate);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .entry p {
+      margin: 0 0 0.4rem;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+
+    .date {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    /* ---------- about strip ---------- */
+
+    .strip {
+      display: flex;
+      gap: 1.75rem;
+      align-items: flex-start;
+    }
+
+    .portrait {
+      width: 6.5rem;
+      height: 8rem;
+      flex: none;
+      object-fit: cover;
+      background: #E4E0D8;
+      filter: grayscale(1) contrast(1.05);
+    }
+
+    .strip p { font-size: 1.08rem; line-height: 1.65; }
+
+    /* ---------- signup ---------- */
+
+    .signup {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 2.5rem 0;
+    }
+
+    .signup p { font-size: 1.05rem; max-width: 30rem; }
+
+    .fields { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+    input[type="email"], input[type="text"], textarea {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.95rem;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--slate-soft);
+      background: #FFFFFF;
+      color: var(--ink);
+      border-radius: 2px;
+      flex: 1 1 15rem;
+      min-width: 0;
+    }
+
+    textarea { width: 100%; min-height: 9rem; resize: vertical; line-height: 1.6; }
+
+    input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--slate);
+      outline-offset: 2px;
+    }
+
+    button {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 2px;
+      background: var(--slate);
+      color: #FFFFFF;
+      cursor: pointer;
+      flex: none;
+    }
+
+    button:hover { opacity: 0.88; }
+
+    ::placeholder { color: #55514B; opacity: 1; }
+
+    .form-note {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.9rem;
+    }
+
+    /* ---------- article ---------- */
+
+    article { margin-bottom: 4rem; }
+
+    article h1 { font-size: 2rem; margin-bottom: 0.75rem; max-width: 32rem; }
+
+    .byline {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    article p:first-of-type { font-size: 1.1rem; }
+
+    .next {
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    /* ---------- footer ---------- */
+
+    footer {
+      border-top: 1px solid var(--rule);
+      margin-top: 5rem;
+      padding: 2.5rem 0 4rem;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--slate); }
+    footer .disclaimer { max-width: 34rem; margin: 0 0 1rem; }
+    footer .crisis { color: var(--ink); }
+
+    /* ---------- motion + responsive ---------- */
+
+    body { animation: rise 0.5s ease-out both; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
+      * { transition: none !important; }
+    }
+
+    @media (max-width: 34rem) {
+      body { font-size: 20px; }
+      .lede { font-size: 1.5rem; }
+      h1 { font-size: 1.6rem; }
+      article h1 { font-size: 1.65rem; }
+      .masthead { margin-bottom: 3rem; }
+      nav a { margin-left: 0; margin-right: 1.25rem; }
+      .strip { flex-direction: column; gap: 1.25rem; }
+    }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html">Orion Maxfield</a>
+      <nav>
+        <a href="../writing.html">Writing</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <article>
+      <span class="pillar">On purpose</span>
+      <h1>You're Not Lazy. Nothing Is Asking Anything of You.</h1>
+      <p class="byline">Draft &middot; Orion Maxfield</p>
+
+      <p>You finish your work in about thirty minutes. Some days less. You're good at
+        it, and nobody's watching closely enough to notice, so the rest of the day is
+        yours. You already know how it goes.</p>
+
+      <p>The same handful of tabs. Something you'd rather not describe to anyone.
+        Around four you look up and the light has changed and you haven't left the
+        apartment or spoken out loud to another person. And somewhere in there the
+        thought arrives, the one that's been arriving for months now: what is wrong
+        with me.</p>
+
+      <p>So let me say the thing plainly, because I don't think anyone has said it to
+        you: that isn't laziness. Laziness would mean you didn't want anything. You
+        want things badly. That's exactly why it hurts.</p>
+
+      <h2>Nobody tells you the scaffolding came down</h2>
+
+      <p>For the first twenty-odd years of your life, structure showed up whether you
+        asked for it or not. School put you in a room with the same people every day
+        and told you what was due. There were teams, wards, classes, jobs where
+        someone noticed if your chair was empty. You didn't build any of that. It was
+        just the shape of things.</p>
+
+      <p>Then it came down. Not all at once &mdash; a move, a graduation, a job that
+        turned into a laptop on a kitchen table, a relationship ending. And nobody
+        announced it. There was no moment where someone said: from here on, if you
+        want anyone to expect you anywhere, you have to construct that yourself, out
+        of nothing, as an adult, while tired.</p>
+
+      <p>So here's where you actually are. You're a capable person with real time and
+        nothing making a claim on it. And a capable person with nothing asking anything
+        of him will find something to fill the hours. The trouble is that the things
+        within easiest reach &mdash; the scroll, the tab, the thing at 2 a.m. &mdash;
+        are the ones that leave you emptier than they found you. Then feeling emptier
+        confirms the story that you're failing. And the story makes the next hour
+        harder to face.</p>
+
+      <p>That's not a character flaw. It's a loop, and it runs on its own.</p>
+
+      <h2>Motivation is the wrong tool</h2>
+
+      <p>You've tried to solve this the way everyone says to. You've made the schedule.
+        You've watched the video about discipline. You've had the Sunday night where it
+        genuinely felt different, and then Wednesday came.</p>
+
+      <p>And every time it collapsed, you filed it as more evidence about yourself.</p>
+
+      <p>I'd file it differently. The strategy is wrong. Motivation is a terrible fuel
+        for someone who's already lonely, because motivation runs on how you feel, and
+        how you feel is the thing that's broken right now. You're trying to lift
+        yourself by the part of you that's currently underwater.</p>
+
+      <p>What's missing isn't drive. It's obligation to a person.</p>
+
+      <p>Not a goal. A goal is a promise you make to yourself in private, and you can
+        quietly release yourself from it at eleven at night and nobody will ever know.
+        A person is different. A person notices. Being expected somewhere gives the day
+        a shape that willpower can't manufacture &mdash; and it works even on the days
+        you don't feel like it, which are the only days that actually matter.</p>
+
+      <h2>One thing, this week</h2>
+
+      <p>Not a system. Not a morning routine. One standing commitment with two
+        properties: it happens at a fixed time, and there is a human being on the other
+        end who would notice if you didn't come.</p>
+
+      <p>A rec league. A class that meets weekly. A volunteer shift where they're
+        counting on the number of bodies. A standing call with a friend where you're
+        the one who calls. A service assignment. It matters much less what it is than
+        that someone is expecting you.</p>
+
+      <p>It will feel too small. It <em>is</em> small, next to the size of the thing
+        you're carrying. Take it anyway.</p>
+
+      <p>I'll be honest about the part I don't fully understand: I don't know exactly
+        why the small, boring, someone-is-waiting-for-me thing works when the ambitious
+        private plan doesn't. My best guess is that it borrows structure from other
+        people until you have enough footing to build your own. That's not a triumphant
+        answer. But I've watched it hold for people it had no business holding for,
+        and I've watched a lot of better-sounding plans fall over by Wednesday.</p>
+
+      <p>Start there. The rest of it &mdash; the purpose, the direction, the version of
+        your life that actually uses what you're good at &mdash; is a real conversation,
+        and it's one I want to have. It just goes better from ground you're standing on.</p>
+    </article>
+
+    <p class="next"><a href="../writing.html">&larr; All writing</a></p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">This site is writing, not therapy. Reading it doesn't create a
+        counseling relationship, and nothing here is a substitute for care from a licensed
+        professional who knows your situation.</p>
+      <p class="crisis">If you're in crisis, call or text 988 (Suicide &amp; Crisis Lifeline, US).</p>
+      <p><a href="../contact.html">Contact</a> &nbsp;·&nbsp; © 2026 Orion Maxfield</p>
+    </div>
+  </footer>
+
+</body>
+</html>
