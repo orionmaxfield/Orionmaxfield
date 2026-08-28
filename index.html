@@ -13,37 +13,82 @@
   <meta property="og:description" content="Writing about loneliness, purpose, and building a life that feels like your own.">
   <meta property="og:url" content="https://orionmaxfield.github.io/">
   <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1B2138">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
 
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="masthead">
-    <div class="wrap">
-      <a class="wordmark" href="index.html">Orion Maxfield</a>
-      <nav>
-        <a href="writing.html">Writing</a>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
-  </header>
+  <div class="sky">
+    <!-- The night sky the page opens in. Orion is the brighter group,
+         right of center; the belt is the same three stars as the favicon. -->
+    <svg class="stars" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- Orion -->
+      <g>
+        <line x1="825" y1="128" x2="874" y2="248"/>
+        <line x1="968" y1="146" x2="928" y2="278"/>
+        <line x1="874" y1="248" x2="901" y2="263"/>
+        <line x1="901" y1="263" x2="928" y2="278"/>
+        <line x1="874" y1="248" x2="846" y2="392"/>
+        <line x1="928" y1="278" x2="992" y2="378"/>
+        <circle cx="825" cy="128" r="2"   opacity="0.6" class="tw"/>
+        <circle cx="968" cy="146" r="1.7" opacity="0.5"/>
+        <circle cx="874" cy="248" r="1.8" opacity="0.75"/>
+        <circle cx="901" cy="263" r="1.8" opacity="0.75" class="tw-slow"/>
+        <circle cx="928" cy="278" r="1.8" opacity="0.75"/>
+        <circle cx="846" cy="392" r="1.5" opacity="0.45"/>
+        <circle cx="992" cy="378" r="2"   opacity="0.6" class="tw-late"/>
+      </g>
+      <!-- scattered field -->
+      <circle cx="72"   cy="90"  r="1.2" opacity="0.35"/>
+      <circle cx="150"  cy="210" r="1"   opacity="0.28" class="tw-slow"/>
+      <circle cx="238"  cy="64"  r="1.4" opacity="0.4"/>
+      <circle cx="332"  cy="158" r="1"   opacity="0.25"/>
+      <circle cx="415"  cy="66"  r="1.2" opacity="0.35" class="tw"/>
+      <circle cx="468"  cy="230" r="1"   opacity="0.22"/>
+      <circle cx="560"  cy="120" r="1.5" opacity="0.42"/>
+      <circle cx="646"  cy="44"  r="1"   opacity="0.3"/>
+      <circle cx="700"  cy="196" r="1.2" opacity="0.32" class="tw-late"/>
+      <circle cx="762"  cy="80"  r="1"   opacity="0.26"/>
+      <circle cx="1058" cy="82"  r="1.3" opacity="0.38"/>
+      <circle cx="1120" cy="238" r="1"   opacity="0.28" class="tw"/>
+      <circle cx="1166" cy="132" r="1.4" opacity="0.4"/>
+      <circle cx="204"  cy="330" r="1"   opacity="0.2"/>
+      <circle cx="380"  cy="308" r="1.2" opacity="0.25" class="tw-slow"/>
+      <circle cx="540"  cy="356" r="1"   opacity="0.2"/>
+      <circle cx="672"  cy="310" r="1"   opacity="0.22"/>
+      <circle cx="1096" cy="352" r="1.2" opacity="0.24"/>
+    </svg>
 
-  <main class="wrap" id="main">
+    <header class="masthead">
+      <div class="wrap">
+        <a class="wordmark" href="index.html">Orion Maxfield</a>
+        <nav>
+          <a href="writing.html">Writing</a>
+          <a href="resources.html">Resources</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
 
     <section class="hero">
-      <p class="lede">Writing about loneliness, purpose, and building a life that
-        feels like your own &mdash; for people in their late twenties and thirties
-        who are quietly wondering if this is it.</p>
-      <p class="sub">No program, no framework, no five steps. Just careful writing about
-        the two things that have to be in place before anything else gets easier:
-        something worth aiming at, and people who notice whether you show up.</p>
+      <div class="wrap">
+        <p class="lede">Writing about loneliness, purpose, and building a life that
+          feels like your own &mdash; for people in their late twenties and thirties
+          who are quietly wondering if this is it.</p>
+        <p class="sub">No program, no framework, no five steps. Just careful writing about
+          the two things that have to be in place before anything else gets easier:
+          something worth aiming at, and people who notice whether you show up.</p>
+      </div>
     </section>
+  </div>
+
+  <main class="wrap" id="main">
 
     <section>
       <p class="section-label">Recent writing</p>

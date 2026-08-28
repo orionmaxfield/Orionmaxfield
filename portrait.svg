@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 160" role="img" aria-label="Portrait placeholder">
-  <rect width="130" height="160" fill="#EAE4DA"/>
+  <rect width="130" height="160" fill="#F4EFE5"/>
   <text x="65" y="88" text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="42" fill="#9C9284" letter-spacing="2">OM</text>
+        font-size="42" fill="#9A927F" letter-spacing="2">OM</text>
 </svg>
