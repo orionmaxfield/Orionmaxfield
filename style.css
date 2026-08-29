@@ -1,0 +1,813 @@
+/* ==========================================================================
+   Orion Maxfield — site styles
+
+   One stylesheet for every page. Change it here and it changes everywhere;
+   don't paste CSS back into the individual HTML files.
+
+   The visual idea: night into dawn. The home page opens in an indigo night
+   sky — a faint Orion in it — and warms into cream paper as you scroll.
+   Every page ends on a night-band footer where the crisis line is the lit
+   thing in the dark. Dark mode is the night expression of the same site,
+   not an inverted one.
+   ========================================================================== */
+
+:root {
+  /* Night band (the sky) */
+  --night: #1B2138;
+  --night-deep: #141830;
+  --night-dusk: #4A3A55;        /* mauve step in the dawn gradient */
+  --on-night: #EFEAE0;          /* text on the night band */
+  --on-night-soft: #C6C0B2;
+  --star: #E8DFC8;
+
+  /* Daylight (the page) */
+  --paper: #FBF8F2;
+  --paper-raised: #F4EFE5;
+  --ink: #1E1B26;
+  --ink-soft: #575066;
+  --rule: #E4DCCC;
+
+  /* Interactive: indigo. Decorative warmth: amber. Amber never carries
+     meaning by itself — links and buttons stay indigo in light mode. */
+  --accent: #3E4A76;
+  --accent-strong: #2E3A64;
+  --on-accent: #FBF8F2;
+  --dawn: #C98A3B;
+  --dawn-soft: #E8B15C;
+  --dawn-deep: #96601B;         /* amber dark enough to be text on paper */
+
+  --shell: 40rem;   /* masthead, footer, list pages */
+  --measure: 36rem; /* long-form prose sits slightly narrower */
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+
+  --ease: 150ms ease;
+}
+
+/* Night mode: the paper itself becomes sky, and amber becomes the
+   interactive color — warm light against the dark. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --night: #141726;
+    --night-deep: #10121E;
+    --night-dusk: #3A3048;
+    --on-night: #EFEAE0;
+    --on-night-soft: #C6C0B2;
+    --star: #E8DFC8;
+
+    --paper: #11131D;
+    --paper-raised: #1A1E2E;
+    --ink: #EDE8DD;
+    --ink-soft: #A9A296;
+    --rule: #262B40;
+
+    --accent: #E0AC5E;
+    --accent-strong: #EDC286;
+    --on-accent: #11131D;
+    --dawn: #C98A3B;
+    --dawn-soft: #E8B15C;
+    --dawn-deep: #E0AC5E;
+  }
+}
+
+/* --------------------------------------------------------------- base --- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.7;
+  font-weight: 450;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Site signature on inner pages: a thin dawn gradient along the top.
+   The home page doesn't need it — it has the whole sky. */
+body::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--night) 0%, var(--night-dusk) 45%, var(--dawn-soft) 100%);
+}
+
+body.home::before { display: none; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Keyboard users get a way past the nav without tabbing through it. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------- night sky --- */
+
+/* Home page only: masthead + hero live inside .sky, which runs from deep
+   night at the top down through dusk to an amber horizon line, then the
+   cream page begins. The starfield SVG sits behind the text. */
+.sky {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      var(--night-deep) 0%,
+      var(--night) 46%,
+      #262A48 68%,
+      var(--night-dusk) 86%,
+      #6A4A47 96%,
+      #8A5F3A 100%);
+  color: var(--on-night);
+  border-bottom: 1px solid rgba(232, 177, 92, 0.55);
+  box-shadow: 0 1px 26px rgba(201, 138, 59, 0.25);
+  margin-bottom: 4.5rem;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* In dark mode the page below is night too, so the horizon banks down to
+   embers instead of blazing into daylight. */
+@media (prefers-color-scheme: dark) {
+  .sky {
+    background:
+      linear-gradient(180deg,
+        var(--night-deep) 0%,
+        var(--night) 46%,
+        #262A48 68%,
+        var(--night-dusk) 88%,
+        #5C4136 97%,
+        #7A5238 100%);
+    border-bottom-color: rgba(232, 177, 92, 0.35);
+    box-shadow: 0 1px 22px rgba(201, 138, 59, 0.18);
+  }
+}
+
+.stars circle { fill: var(--star); }
+.stars line {
+  stroke: var(--star);
+  stroke-width: 0.5;
+  opacity: 0.13;
+}
+
+.sky .masthead,
+.sky .hero {
+  position: relative; /* above the starfield */
+}
+
+.sky .masthead {
+  border-bottom: 1px solid rgba(239, 234, 224, 0.14);
+  margin-bottom: 0;
+}
+
+.sky .wordmark {
+  color: var(--on-night);
+  border-bottom-color: var(--dawn-soft);
+}
+
+.sky nav a { color: #CDC7B9; }
+
+.sky nav a:hover,
+.sky nav a:focus-visible,
+.sky nav a[aria-current="page"] { color: var(--on-night); }
+
+.sky nav a[aria-current="page"]::after { background: var(--dawn-soft); }
+
+.sky .hero {
+  padding: 4.75rem 0 5.5rem;
+  margin-bottom: 0;
+}
+
+.sky .lede { color: var(--on-night); }
+.sky .sub { color: var(--on-night-soft); }
+
+.sky :focus-visible { outline-color: var(--dawn-soft); }
+
+/* ------------------------------------------------------------- header --- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.75rem 0;
+  margin-bottom: 4rem;
+}
+
+.masthead .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--dawn);
+  padding-bottom: 2px;
+}
+
+nav {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+nav a {
+  position: relative;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-left: 1.6rem;
+  padding-bottom: 3px;
+  transition: color var(--ease);
+}
+
+nav a:first-child { margin-left: 0; }
+
+/* Hairline that sweeps in on hover and stays put on the current page. */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible { color: var(--ink); }
+
+nav a:hover::after,
+nav a:focus-visible::after { transform: scaleX(1); }
+
+nav a[aria-current="page"] { color: var(--ink); }
+
+nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+  background: var(--dawn);
+}
+
+/* --------------------------------------------------------------- type --- */
+
+h1, h2, h3 {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+h1 { font-size: 1.95rem; }
+h2 { font-size: 1.18rem; margin-top: 3.5rem; }
+h3 { font-size: 1rem; }
+
+p { margin: 0 0 1.5rem; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--ease);
+}
+
+a:hover { color: var(--accent-strong); }
+
+em { font-style: italic; }
+
+strong { font-weight: 600; }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 2.35rem;
+  line-height: 1.22;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+  max-width: 36rem;
+  text-wrap: pretty;
+}
+
+.sub {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 32rem;
+}
+
+/* Eyebrow: marks which of the two pillars a piece belongs to. */
+.pillar {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dawn-deep);
+  display: block;
+  margin-bottom: 0.55rem;
+}
+
+.pillar::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--dawn);
+  margin-right: 0.6rem;
+  vertical-align: 0.08rem;
+}
+
+/* ----------------------------------------------------------- sections --- */
+
+section { margin-bottom: 4.5rem; }
+
+.hero { margin-bottom: 5rem; }
+
+/* Section labels sit on a "horizon" hairline: amber at the left, fading
+   out to the right. */
+.section-label {
+  position: relative;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.section-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dawn) 0%, var(--rule) 45%, transparent 100%);
+}
+
+/* ------------------------------------------------------ writing list --- */
+
+.entry {
+  position: relative;
+  padding: 1.9rem 1rem;
+  margin: 0 -1rem;
+  border-radius: 6px;
+  border-bottom: 1px solid var(--rule);
+  transition: background var(--ease);
+}
+
+.entry:last-child { border-bottom: none; }
+
+.entry:hover { background: var(--paper-raised); }
+
+.entry a {
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.3;
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  /* Underline drawn as a background so it can animate its width. */
+  background-image: linear-gradient(var(--dawn), var(--dawn));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 220ms ease, color var(--ease);
+}
+
+.entry a:hover,
+.entry a:focus-visible {
+  color: var(--accent);
+  background-size: 100% 1px;
+}
+
+.entry p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.6;
+  max-width: 33rem;
+}
+
+.date {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* -------------------------------------------------------- about strip --- */
+
+.strip {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+.portrait {
+  width: 6.5rem;
+  height: 8rem;
+  flex: none;
+  object-fit: cover;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  filter: grayscale(1) contrast(1.05);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.strip p { font-size: 1.06rem; line-height: 1.65; }
+
+/* ------------------------------------------------------------- signup --- */
+
+/* "First light": a raised warm panel with a dawn gradient across its top. */
+.signup {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #F7EFDF 0%, var(--paper-raised) 55%);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 2.4rem 1.75rem 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .signup { background: linear-gradient(180deg, #201E2C 0%, var(--paper-raised) 55%); }
+}
+
+.signup::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--night-dusk) 0%, var(--dawn) 50%, var(--dawn-soft) 100%);
+}
+
+.signup h2 { margin-top: 0; }
+
+.signup p { font-size: 1.04rem; max-width: 30rem; }
+
+.fields { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+input[type="email"],
+input[type="text"],
+textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 3px;
+  flex: 1 1 15rem;
+  min-width: 0;
+  transition: border-color var(--ease);
+}
+
+input:hover,
+textarea:hover { border-color: var(--ink-soft); }
+
+textarea {
+  width: 100%;
+  min-height: 9rem;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+::placeholder { color: var(--ink-soft); opacity: 1; }
+
+button {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.72rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  flex: none;
+  transition: background var(--ease), border-color var(--ease), transform var(--ease);
+}
+
+button:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+button:active { transform: translateY(1px); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.form-note {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-top: 0.9rem;
+}
+
+/* ------------------------------------------------------------ article --- */
+
+article { margin-bottom: 4rem; }
+
+article h1 {
+  font-size: 2.35rem;
+  line-height: 1.15;
+  margin-bottom: 0.85rem;
+  max-width: 34rem;
+}
+
+article > p { max-width: var(--measure); }
+
+.byline {
+  position: relative;
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  padding-bottom: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.byline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dawn) 0%, var(--rule) 45%, transparent 100%);
+}
+
+/* The paragraph right after the byline is the lead. (Not p:first-of-type —
+   that selects the byline itself.) */
+.byline + p { font-size: 1.06rem; }
+
+.byline + p::first-letter {
+  float: left;
+  font-family: var(--serif);
+  font-size: 3.5em;
+  line-height: 0.84;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0.03em 0.09em 0 0;
+}
+
+/* Short dawn rule marks each section break. */
+article h2 {
+  margin-top: 3.4rem;
+  font-size: 1.22rem;
+  max-width: var(--measure);
+}
+
+article h2::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--dawn), var(--dawn-soft));
+  margin-bottom: 1.15rem;
+}
+
+blockquote {
+  margin: 2.25rem 0;
+  padding-left: 1.4rem;
+  border-left: 2px solid var(--dawn);
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: var(--measure);
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+.next {
+  border-top: 1px solid var(--rule);
+  padding-top: 2rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+
+.next a { text-decoration: none; }
+.next a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ------------------------------------------------------------- footer --- */
+
+/* Every page ends back in the night. The crisis line is the brightest
+   thing in the band — deliberately. */
+footer {
+  margin-top: 5rem;
+  padding: 3rem 0 4rem;
+  background:
+    radial-gradient(1px 1px at 12% 28%, rgba(232, 223, 200, 0.5), transparent 100%),
+    radial-gradient(1px 1px at 31% 68%, rgba(232, 223, 200, 0.34), transparent 100%),
+    radial-gradient(1.5px 1.5px at 48% 22%, rgba(232, 223, 200, 0.42), transparent 100%),
+    radial-gradient(1px 1px at 65% 55%, rgba(232, 223, 200, 0.3), transparent 100%),
+    radial-gradient(1px 1px at 79% 30%, rgba(232, 223, 200, 0.45), transparent 100%),
+    radial-gradient(1.5px 1.5px at 91% 70%, rgba(232, 223, 200, 0.35), transparent 100%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
+  border-top: 1px solid rgba(232, 177, 92, 0.4);
+  color: #B7B1A2;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+footer a { color: var(--dawn-soft); }
+footer a:hover { color: #F1C87E; }
+footer .disclaimer { max-width: 34rem; margin: 0 0 1rem; }
+footer .crisis { color: var(--on-night); font-weight: 500; }
+footer :focus-visible { outline-color: var(--dawn-soft); }
+
+/* ------------------------------------------------ motion + responsive --- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  body { animation: rise 0.5s ease-out both; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* A few stars breathe, slowly and out of phase. Nothing blinks. */
+  .stars .tw       { animation: twinkle 9s ease-in-out infinite; }
+  .stars .tw-slow  { animation: twinkle 13s ease-in-out infinite 2.5s; }
+  .stars .tw-late  { animation: twinkle 11s ease-in-out infinite 5s; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 34rem) {
+  body { font-size: 20px; }
+  .lede { font-size: 1.7rem; }
+
+  /* A phone-width crop of the wide starfield would cut Orion out entirely,
+     so swap the SVG for a sprinkling of CSS stars over the same gradient. */
+  .stars { display: none; }
+
+  .sky {
+    background:
+      radial-gradient(1.5px 1.5px at 12% 10%, rgba(232, 223, 200, 0.5), transparent 100%),
+      radial-gradient(1px 1px at 78% 7%, rgba(232, 223, 200, 0.35), transparent 100%),
+      radial-gradient(1px 1px at 34% 20%, rgba(232, 223, 200, 0.3), transparent 100%),
+      radial-gradient(2px 2px at 88% 17%, rgba(232, 223, 200, 0.55), transparent 100%),
+      radial-gradient(1px 1px at 55% 9%, rgba(232, 223, 200, 0.28), transparent 100%),
+      radial-gradient(1.5px 1.5px at 66% 26%, rgba(232, 223, 200, 0.4), transparent 100%),
+      radial-gradient(1px 1px at 20% 33%, rgba(232, 223, 200, 0.25), transparent 100%),
+      radial-gradient(1px 1px at 90% 38%, rgba(232, 223, 200, 0.3), transparent 100%),
+      linear-gradient(180deg,
+        var(--night-deep) 0%,
+        var(--night) 46%,
+        #262A48 68%,
+        var(--night-dusk) 86%,
+        #6A4A47 96%,
+        #8A5F3A 100%);
+  }
+
+  /* Keep the ember ending on dark-mode phones (this rule is later in the
+     sheet than the desktop dark override, so it must restate it). */
+  @media (prefers-color-scheme: dark) {
+    .sky {
+      background:
+        radial-gradient(1.5px 1.5px at 12% 10%, rgba(232, 223, 200, 0.5), transparent 100%),
+        radial-gradient(1px 1px at 78% 7%, rgba(232, 223, 200, 0.35), transparent 100%),
+        radial-gradient(1px 1px at 34% 20%, rgba(232, 223, 200, 0.3), transparent 100%),
+        radial-gradient(2px 2px at 88% 17%, rgba(232, 223, 200, 0.55), transparent 100%),
+        radial-gradient(1px 1px at 55% 9%, rgba(232, 223, 200, 0.28), transparent 100%),
+        radial-gradient(1.5px 1.5px at 66% 26%, rgba(232, 223, 200, 0.4), transparent 100%),
+        radial-gradient(1px 1px at 20% 33%, rgba(232, 223, 200, 0.25), transparent 100%),
+        radial-gradient(1px 1px at 90% 38%, rgba(232, 223, 200, 0.3), transparent 100%),
+        linear-gradient(180deg,
+          var(--night-deep) 0%,
+          var(--night) 46%,
+          #262A48 68%,
+          var(--night-dusk) 88%,
+          #5C4136 97%,
+          #7A5238 100%);
+    }
+  }
+  h1 { font-size: 1.6rem; }
+  article h1 { font-size: 1.75rem; }
+  .byline + p::first-letter { font-size: 3em; }
+  .masthead { margin-bottom: 3rem; }
+  .sky .masthead { margin-bottom: 0; }
+  .sky .hero { padding: 3.25rem 0 4rem; }
+  nav a { margin-left: 0; margin-right: 1.25rem; }
+  .strip { flex-direction: column; gap: 1.25rem; }
+  .signup { padding: 1.9rem 1.25rem; }
+  .entry { margin: 0; padding-left: 0; padding-right: 0; }
+  .entry:hover { background: none; }
+}
+
+/* --------------------------------------------------------------- print --- */
+
+@media print {
+  .masthead nav, .signup, .next, .skip, .stars { display: none; }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+    animation: none;
+  }
+
+  body::before { display: none; }
+
+  .sky {
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid #000;
+    box-shadow: none;
+    margin-bottom: 2rem;
+  }
+
+  .sky .lede, .sky .sub, .sky .wordmark { color: #000; }
+
+  footer {
+    background: #fff;
+    color: #000;
+    border-top: 1px solid #000;
+  }
+
+  footer a, footer .crisis { color: #000; }
+
+  .wrap { max-width: none; padding: 0; }
+
+  a { color: #000; }
+
+  /* Essays get read on paper too; show where the links went. */
+  article a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
