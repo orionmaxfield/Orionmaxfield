@@ -811,3 +811,137 @@ footer :focus-visible { outline-color: var(--dawn-soft); }
     word-break: break-all;
   }
 }
+
+/* ================================================== home: six-block scroll ===
+
+   The homepage is one descent: night hero, then a step, then a step.
+   One line of truth at a time; generous space between blocks; no
+   paragraph stacks. These classes are used only on index.html. */
+
+/* Block 1 — the hero owns the first screen: two lines, nothing else. */
+body.home .sky {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.home .sky .hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 3rem 0 6rem;
+  margin-bottom: 0;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.9rem, 9vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+
+.hero-sub {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  max-width: 27rem;
+  margin: 0;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.sky .hero-sub { color: var(--on-night-soft); }
+
+/* The blocks. Each one is a landing on the climb. */
+.block {
+  padding: 5.5rem 0;
+  margin-bottom: 0;
+}
+
+/* Block 2 — each cognition is its own breath. */
+.breath {
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.45;
+  max-width: 28rem;
+  margin: 0 0 2.2rem;
+  color: var(--ink-soft);
+}
+
+/* The visual beat before the turn: a short dawn rule. */
+.beat {
+  width: 2rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--dawn), var(--dawn-soft));
+  margin: 3.25rem 0;
+}
+
+.turn {
+  font-size: 1.55rem;
+  line-height: 1.3;
+  font-weight: 500;
+  max-width: 28rem;
+  margin: 0 0 0.8rem;
+}
+
+.turn-after {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Blocks 3, 4 and 6 — one short line of truth at a time. */
+.step {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  max-width: 30rem;
+  margin: 0 0 2.1rem;
+  text-wrap: pretty;
+}
+
+.step:last-child { margin-bottom: 0; }
+
+/* The one piece of small print that earns its place: the guardrail. */
+.aside {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 27rem;
+  border-left: 2px solid var(--dawn);
+  padding-left: 1.1rem;
+  margin: 0 0 2.1rem;
+}
+
+/* Block 6 — the bookend echoes the hero. */
+.close-echo {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 6vw, 2.7rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+@media (max-width: 34rem) {
+  /* On a phone, each block feels like its own screen. */
+  .block {
+    min-height: 86svh;
+    display: grid;
+    align-content: center;
+    padding: 4rem 0;
+  }
+
+  .breath { font-size: 1.22rem; margin-bottom: 1.9rem; }
+  .turn { font-size: 1.4rem; }
+  .step { font-size: 1.18rem; margin-bottom: 1.8rem; }
+}
+
+@media print {
+  body.home .sky { min-height: 0; }
+  .block { min-height: 0; padding: 1.5rem 0; }
+  .beat { background: #000; }
+}
