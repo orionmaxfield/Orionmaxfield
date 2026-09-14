@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Orion Maxfield</title>
-  <meta name="description" content="Writing about loneliness, purpose, and building a life that feels like your own.">
+  <meta name="description" content="Stop doing. Start becoming. You can't become who you're meant to be until you see who you already are.">
   <link rel="canonical" href="https://orionmaxfield.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Orion Maxfield">
   <meta property="og:title" content="Orion Maxfield">
-  <meta property="og:description" content="Writing about loneliness, purpose, and building a life that feels like your own.">
+  <meta property="og:description" content="Stop doing. Start becoming. You can't become who you're meant to be until you see who you already are.">
   <meta property="og:url" content="https://orionmaxfield.github.io/">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#1B2138">
@@ -76,66 +76,97 @@
       </div>
     </header>
 
+    <!-- BLOCK 1 — hero. These two lines, and nothing else, fill the first screen. -->
     <section class="hero">
       <div class="wrap">
-        <p class="lede">Writing about loneliness, purpose, and building a life that
-          feels like your own &mdash; for people in their late twenties and thirties
-          who are quietly wondering if this is it.</p>
-        <p class="sub">No program, no framework, no five steps. Just careful writing about
-          the two things that have to be in place before anything else gets easier:
-          something worth aiming at, and people who notice whether you show up.</p>
+        <h1 class="hero-title">Stop doing.<br>Start becoming.</h1>
+        <p class="hero-sub">You can&rsquo;t become who you&rsquo;re meant to be
+          until you see who you already are.</p>
       </div>
     </section>
   </div>
 
-  <main class="wrap" id="main">
+  <main id="main">
 
-    <section>
-      <p class="section-label">Recent writing</p>
-
-      <!-- Newest piece goes at the top. Copy this block to add another. -->
-      <div class="entry">
-        <span class="pillar">On purpose</span>
-        <a href="writing/not-lazy.html">You're Not Lazy. Nothing Is Asking Anything of You.</a>
-        <p>You finish your work in thirty minutes and spend the rest of the day
-          on things that leave you worse. That isn't a discipline problem.</p>
-        <span class="date">Draft</span>
+    <!-- BLOCK 2 — the cognitions. Each line is its own breath. -->
+    <section class="block" aria-label="The thoughts">
+      <div class="wrap">
+        <p class="breath">If I can just be consistent, everything will fall into place.</p>
+        <p class="breath">If I can just figure this out, the rest will follow.</p>
+        <p class="breath">If I can just get this one thing right, it&rsquo;ll finally click.</p>
+        <div class="beat" aria-hidden="true"></div>
+        <p class="turn">That&rsquo;s not becoming. That&rsquo;s earning.</p>
+        <p class="turn-after">And it was never going to work.</p>
       </div>
-
-      <p class="sub" style="margin-top:1.75rem">New pieces land here as they're written.
-        <a href="writing.html">See everything &rarr;</a></p>
     </section>
 
-    <section>
-      <p class="section-label">Who's writing this</p>
-      <div class="strip" style="margin-top:2rem">
-        <!-- Placeholder. Drop your photo in as portrait.jpg and change the src below. -->
-        <img class="portrait" src="portrait.svg" alt="Orion Maxfield">
-        <div>
-          <p>I've run nonprofits, coordinated research, worked crisis lines, and spent
-            nights on a psychiatric unit. I'm now training as a clinical mental health
-            counselor. What I keep finding, in every one of those rooms, is that people
-            aren't short on capability. They're short on connection and on something
-            that needs them.</p>
-          <p><a href="about.html">More about me &rarr;</a></p>
+    <!-- BLOCK 3 — the guide. See, stand, climb. No bio, no credentials. -->
+    <section class="block" aria-label="How this works">
+      <div class="wrap">
+        <p class="step">This is simpler than you&rsquo;ve been told. It doesn&rsquo;t
+          require anyone special. It&rsquo;s just how people grow.</p>
+        <p class="step">You are good. Not &ldquo;good enough&rdquo; &mdash; good.
+          And that is enough to begin.</p>
+        <p class="step">Before anything changes, you have to see yourself clearly,
+          with enough kindness that you can bear to look.</p>
+        <p class="step">That footing is what you change from. And a man who changes
+          moves through the world differently.</p>
+      </div>
+    </section>
+
+    <!-- BLOCK 4 — the first step. Free. Never gate the first win. -->
+    <section class="block" aria-label="The first step">
+      <div class="wrap">
+        <p class="pillar">The first step</p>
+        <p class="step">Stand in front of a mirror.</p>
+        <p class="step">Name one to three things you genuinely love about yourself.
+          They don&rsquo;t have to be physical &mdash; though they can be.
+          The work is in having to search for them.</p>
+        <p class="aside">One rule: love is not acceptance. &ldquo;I love that
+          I&rsquo;m overweight&rdquo; is acceptance, not love. Love finds what
+          is genuinely good and true.</p>
+        <p class="step">That&rsquo;s the whole first step. It&rsquo;s free.
+          No email, no signup, no gate.</p>
+      </div>
+    </section>
+
+    <!-- BLOCK 5 — the call to action. Quiet and low-pressure. -->
+    <section class="block" aria-label="Keep going">
+      <div class="wrap">
+        <div class="signup">
+          <h2>Keep going</h2>
+          <p>When you&rsquo;re ready for more than the mirror, there&rsquo;s a
+            printable worksheet that continues the exercise &mdash; one small
+            step a day, for a week. I&rsquo;ll send it to you.</p>
+
+          <!-- WIRING THIS UP: sign up with an email provider (MailerLite, Buttondown,
+               Kit), then paste their form action URL below and rename the input if
+               they require it. Until that's filled in, this form does not go anywhere. -->
+          <form class="fields" action="PASTE_YOUR_PROVIDER_FORM_URL_HERE" method="post">
+            <label for="email" style="position:absolute;left:-9999px">Email address</label>
+            <input id="email" type="email" name="email" placeholder="you@example.com" required>
+            <button type="submit">Send me the worksheet</button>
+          </form>
+          <p class="form-note">No schedule, no funnel, nothing to buy.
+            Unsubscribe any time.</p>
         </div>
       </div>
     </section>
 
-    <section class="signup">
-      <h2>Get new pieces when they're up</h2>
-      <p>That's the whole offer. I'll send you what I publish. No newsletter schedule,
-        no funnel, nothing to buy.</p>
-
-      <!-- WIRING THIS UP: sign up with an email provider (Buttondown, Kit, MailerLite),
-           then paste their form action URL below and rename the input if they require it.
-           Until that's filled in, this form does not go anywhere. -->
-      <form class="fields" action="PASTE_YOUR_PROVIDER_FORM_URL_HERE" method="post">
-        <label for="email" style="position:absolute;left:-9999px">Email address</label>
-        <input id="email" type="email" name="email" placeholder="you@example.com" required>
-        <button type="submit">Send me new pieces</button>
-      </form>
-      <p class="form-note">Unsubscribe any time. I don't share your address with anyone.</p>
+    <!-- BLOCK 6 — the close. Same road, different man. Not a fear pitch. -->
+    <section class="block" aria-label="The close">
+      <div class="wrap">
+        <p class="step">You&rsquo;ve been here before. You know what doing
+          feels like.</p>
+        <p class="step">Keep doing, and tomorrow stays what it is: grinding,
+          earning, waiting for a payoff that never comes.</p>
+        <p class="step">Start becoming, and tomorrow looks exactly the same
+          &mdash; same life, same struggles, same hard days &mdash; except
+          you&rsquo;re walking that road as a different man. The weight lands
+          differently.</p>
+        <div class="beat" aria-hidden="true"></div>
+        <p class="close-echo">Stop doing. Start becoming.</p>
+      </div>
     </section>
   </main>
 
